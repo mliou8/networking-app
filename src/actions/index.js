@@ -4,9 +4,6 @@ import Firebase from 'firebase';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const AUTH_USER = 'AUTH_USER';
-export const OPEN_MODAL = 'OPEN_MODAL';
-export const CLOSE_MODAL = 'CLOSE_MODAL';
-export const FETCH_FAVORITED_JOBS = 'FETCH_FAVORITED_JOBS';
 
 const config = {
   apiKey: "AIzaSyDO6D8JHajOU4Inp9ZKWgDuaohdm2PTiI4",
@@ -70,35 +67,6 @@ export function verifyAuth() {
   }
 }
 
-export function favoriteJob({selectedJob}) {
-  const userUid = Firebase.auth().currentUser.uid;
-  const jobId = selectedJob.id;
-  
-  return dispatch => Firebase.database().ref(userUid).update({
-    [jobId]: selectedJob
-  });
-}
-
-export function unfavoriteJob({selectedJob}) {
-  const userUid = Firebase.auth().currentUser.uid;
-  const jobId = selectedJob.id;
-  
-  return dispatch => Firebase.database().ref(userUid).child(jobId).remove();
-}
-
-export function fetchFavoritedJobs() {
-  return function(dispatch) {
-    const userUid = Firebase.auth().currentUser.uid;
-    
-    Firebase.database().ref(userUid).on('value', snapshot => {
-      dispatch({
-        type: FETCH_FAVORITED_JOBS,
-        payload: snapshot.val()
-      })
-    });
-  }
-}
-
 export function authUser() {
   return {
     type: AUTH_USER
@@ -112,16 +80,7 @@ export function authError(error) {
   }
 }
 
-export function openModal(job) {
-  return {
-    type: OPEN_MODAL,
-    job
-  }
-}
-
-export function closeModal() {
-  return {
-    type: CLOSE_MODAL
-  }
+export function fetchMatch() {
+  
 }
 

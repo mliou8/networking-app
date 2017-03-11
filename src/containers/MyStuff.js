@@ -9,7 +9,7 @@ class MyStuff extends React.Component {
   render() {
     return (
       <div>
-        {this.props.authenticated ? <p>This is authenticated </p> : <p>this is not authenticated</p>}
+        
       </div>
     );
   }

@@ -68,12 +68,6 @@ class Signup extends React.Component {
             <Field name="email" type="text" component={this.renderField} label="Email"/>
             <Field name="password" type="password" component={this.renderField} label="Password"/>
             <Field name="passwordConfirmation" type="password" component={this.renderField} label="Password Confirmation"/>
-            <Field name="preferredJob" component="select" label="preferredJob">
-              <option value="">Select an Option</option>
-              <option value="frontend">Front End</option>
-              <option value="backend">Back End</option>
-              <option value="data">Data</option>
-            </Field>
             <button action="submit" className="btn btn-primary">Sign up</button>
           </form>
         </div>

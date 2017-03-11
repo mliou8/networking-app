@@ -5,7 +5,7 @@ const initialState = {
   error: null
 };
 
-export default function jobs(state = initialState, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case AUTH_USER:
       return {
