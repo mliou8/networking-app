@@ -1,17 +1,11 @@
 import { browserHistory } from 'react-router';
 import Firebase from 'firebase';
-
+import {firebaseKey} from '../env_variables/api-keys.js'
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const AUTH_USER = 'AUTH_USER';
 
-const config = {
-  apiKey: "AIzaSyDO6D8JHajOU4Inp9ZKWgDuaohdm2PTiI4",
-  authDomain: "referral-buddy.firebaseapp.com",
-  databaseURL: "https://referral-buddy.firebaseio.com",
-  storageBucket: "referral-buddy.appspot.com",
-  messagingSenderId: "766913423082"
-};
+const config = firebaseKey;
 
 
 Firebase.initializeApp(config);
