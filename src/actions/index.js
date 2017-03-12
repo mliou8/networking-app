@@ -9,11 +9,25 @@ const config = firebaseKey;
 
 
 Firebase.initializeApp(config);
+const database = Firebase.database();
+
+//Create user in realtime db
+function createUser(userId, name, email, imageUrl) {
+  Firebase.database().ref('users/' + userId).set({
+    displayName: name,
+    email: email
+  });
+}
 
 
 export function signUpUser(credentials) {
   return function(dispatch) {
     Firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password)
+      .then(response => {
+        console.log("response is ", response)
+        console.log("credentials are ", credentials)
+        createUser(response.uid, credentials.name, credentials.email)
+      })
       .then(response => {
         dispatch(authUser());
         browserHistory.push('/myStuff');
@@ -23,8 +37,7 @@ export function signUpUser(credentials) {
         dispatch(authError(error));
       });
   }
-}
-
+}  
 
 export function signInUser(credentials) {
   return function(dispatch) {

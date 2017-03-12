@@ -16,7 +16,7 @@ const validate = values => {
   if (!values.passwordConfirmation) {
     errors.passwordConfirmation = "Please enter a password confirmation.";
   }
-  if (values.password !== values.passwordConfirmation) {
+  if (values.password !== values.passwordConfirmation && values.passwordConfirmation !== null) {
     errors.password = 'Passwords do not match';
   }
 
@@ -65,6 +65,7 @@ class Signup extends React.Component {
           <h2 className="text-center">Sign Up</h2>
           {this.renderAuthenticationError()}
           <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+            <Field name="name" type="text" component={this.renderField} label="Name"/>
             <Field name="email" type="text" component={this.renderField} label="Email"/>
             <Field name="password" type="password" component={this.renderField} label="Password"/>
             <Field name="passwordConfirmation" type="password" component={this.renderField} label="Password Confirmation"/>
