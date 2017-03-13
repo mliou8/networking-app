@@ -5,11 +5,17 @@ import * as Actions from '../actions';
 import '../styles/App.css';
 
 class MyStuff extends React.Component {
-
+  
+  componentWillMount() {
+    this.props.actions.fetchUserData();
+  }
+  
   render() {
+    const {displayName, email} = this.props.userInfo
     return (
       <div>
-        
+        <h3>Display Name: {displayName}</h3>
+        <h3>Email: {email}</h3>
       </div>
     );
   }
@@ -18,6 +24,7 @@ class MyStuff extends React.Component {
   function mapStateToProps(state) {
     return {
       authenticated: state.auth.authenticated,
+      userInfo: state.user.userData
     };
   }
 

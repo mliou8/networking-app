@@ -16,6 +16,7 @@ class Home extends React.Component {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
+    userInfo: state.user.userData
   };
 }
 
