@@ -6,8 +6,9 @@ import '../styles/App.css';
 
 class MyStuff extends React.Component {
   
-  componentWillMount() {
+  componentDidMount() {
     this.props.actions.fetchUserData();
+    this.props.actions.fetchMatchData();
   }
   
   render() {

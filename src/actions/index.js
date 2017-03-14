@@ -5,6 +5,7 @@ export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const AUTH_USER = 'AUTH_USER';
 export const FETCH_USER_DATA = 'FETCH_USER_DATA';
+export const FETCH_MATCH_DATA = 'FETCH_MATCH_DATA';
 
 const config = firebaseKey;
 
@@ -15,7 +16,8 @@ Firebase.initializeApp(config);
 function createUser(userId, name, email, imageUrl) {
   Firebase.database().ref('users/' + userId).set({
     displayName: name,
-    email: email
+    email: email,
+    usersPaired: [],
   });
 }
 
@@ -61,9 +63,7 @@ export function signOutUser() {
 export function fetchUserData() {
   return function(dispatch) {
     const userUid = Firebase.auth().currentUser.uid
-    
     Firebase.database().ref('users/' + userUid).once('value', snapshot => {
-      console.log("snapshot is ", snapshot, snapshot.val())
       dispatch({
         type: FETCH_USER_DATA,
         payload: snapshot.val()
@@ -72,8 +72,33 @@ export function fetchUserData() {
   }
 }
 
+// Find all user data for first user.
+// Find all users in an array
+// Run a function on all those users, that if they are not the first user,
+// Then randomly select one and return it as the "match"
+
+export function fetchMatchData() {
+  return function(dispatch) {
+    const userUid = Firebase.auth().currentUser.uid
+    Firebase.database().ref('users/' + userUid).once('value', snapshot => {
+      const { displayName } = snapshot.val()
+      Firebase.database().ref('users/').once('value', snapshotSecond => {
+        console.log("snapshotSecond ", snapshotSecond)
+        snapshotSecond.forEach((childSnapshot) => {
+          if (userUid !== childSnapshot.key) {
+            console.log("potential match ", childSnapshot)
+            // if (usersPaired.indexOf(childSnapshot.key !== -1)) {
+              // matchPairs.push(childSnapshot)
+            // }
+          }
+        })
+      })
+    })
+  }
+}
+
 export function verifyAuth() {
-  return function (dispatch) {
+  return function (dispatch) {  
     Firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log("user authenticated")
