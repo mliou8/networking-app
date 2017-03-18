@@ -9,7 +9,7 @@ import SignUp from './containers/Signup';
 import Login from './containers/Login';
 import RequireAuth from './containers/RequireAuth';
 import Dashboard from './components/Dashboard';
-import MyStuff from './containers/MyStuff';
+import MatchPage from './containers/MatchPageContainer';
 import configureStore from './store/configureStore';
 
 const store = configureStore();
@@ -22,7 +22,7 @@ ReactDOM.render(
       <Route path="signup" component={SignUp}/>
       <Route path="dashboard" component={Dashboard}/>
       <Route path="login" component={Login}/>
-      <Route path="myStuff" component={RequireAuth(MyStuff)}/>
+      <Route path="matchpage" component={RequireAuth(MatchPage)}/>
     </Route>
   </Router>
   </Provider>,

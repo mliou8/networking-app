@@ -17,7 +17,7 @@ function createUser(userId, name, email, imageUrl) {
   Firebase.database().ref('users/' + userId).set({
     displayName: name,
     email: email,
-    usersPaired: [],
+    usersPaired: [userId],
   });
 }
 
@@ -29,7 +29,7 @@ export function signUpUser(credentials) {
       })
       .then(response => {
         dispatch(authUser());
-        browserHistory.push('/myStuff');
+        browserHistory.push('/matchpage');
       })
       .catch(error => {
         console.log("this is the error isn't it", error);
@@ -43,7 +43,7 @@ export function signInUser(credentials) {
     Firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(response => {
         dispatch(authUser());
-        browserHistory.push('/myStuff');
+        browserHistory.push('/matchpage');
       })
       .catch(error => {
         dispatch(authError(error));
@@ -54,7 +54,7 @@ export function signInUser(credentials) {
 export function signOutUser() {
   Firebase.auth().signOut();
   browserHistory.push('/');
-
+  
   return {
     type: SIGN_OUT_USER
   }
@@ -77,31 +77,43 @@ export function fetchUserData() {
 // Run a function on all those users, that if they are not the first user,
 // Then randomly select one and return it as the "match"
 
-export function fetchMatchData() {
+export function fetchMatchData(currentUser) {
   return function(dispatch) {
-    const userUid = Firebase.auth().currentUser.uid
-    Firebase.database().ref('users/' + userUid).once('value', snapshot => {
-      const { displayName } = snapshot.val()
-      Firebase.database().ref('users/').once('value', snapshotSecond => {
-        console.log("snapshotSecond ", snapshotSecond)
-        snapshotSecond.forEach((childSnapshot) => {
-          if (userUid !== childSnapshot.key) {
-            console.log("potential match ", childSnapshot)
-            // if (usersPaired.indexOf(childSnapshot.key !== -1)) {
-              // matchPairs.push(childSnapshot)
-            // }
-          }
-        })
+      const { displayName, usersPaired, userId } = currentUser
+      const suitableUsers = [];
+      Firebase.database().ref('users/').once('value', allUsers => {
+          allUsers.forEach((user) => {
+            if (usersPaired.indexOf(user.key) == -1) {
+              suitableUsers.push(user.val())
+            }
+          })
       })
-    })
+      const match = suitableUsers[Math.floor(Math.random()*suitableUsers.length)];
+      var usersPairedRef = Firebase.database().ref('users/' + userId + '/usersPaired');
+      usersPairedRef.on('value', function(snapshot) {
+        updateUsersPaired(match.key, snapshot.val(), userId);
+      });
+      
+      dispatch({
+        type: FETCH_MATCH_DATA,
+        payload: match
+      })
   }
+}
+
+// Need to update both Users with the fact that the match is going
+// to be queued up. Update a value?
+export function updateUsersPaired(incValue, currentValue, userId) {
+  const newVal = currentValue.push(incValue)
+  Firebase.database().ref('users/' + userId).set({
+    usersPaired: newVal
+  })
 }
 
 export function verifyAuth() {
   return function (dispatch) {  
     Firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log("user authenticated")
         dispatch(authUser());
       } else {
         dispatch(signOutUser());
