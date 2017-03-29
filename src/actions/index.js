@@ -9,7 +9,6 @@ export const FETCH_MATCH_DATA = 'FETCH_MATCH_DATA';
 
 const config = firebaseKey;
 
-
 Firebase.initializeApp(config);
 
 //Create user in realtime db
@@ -45,6 +44,9 @@ export function signInUser(credentials) {
         dispatch(authUser());
         browserHistory.push('/matchpage');
       })
+      .then(response => {
+        dispatch(fetchUserData());
+      })
       .catch(error => {
         dispatch(authError(error));
       });
@@ -60,6 +62,7 @@ export function signOutUser() {
   }
 }
 
+// Find all data for the first user
 export function fetchUserData() {
   return function(dispatch) {
     const userUid = Firebase.auth().currentUser.uid
@@ -72,11 +75,7 @@ export function fetchUserData() {
   }
 }
 
-// Find all user data for first user.
-// Find all users in an array
-// Run a function on all those users, that if they are not the first user,
-// Then randomly select one and return it as the "match"
-
+// Fetch their Match
 export function fetchMatchData(currentUser) {
   return function(dispatch) {
       const { displayName, usersPaired, userId } = currentUser
@@ -93,7 +92,6 @@ export function fetchMatchData(currentUser) {
       usersPairedRef.on('value', function(snapshot) {
         updateUsersPaired(match.key, snapshot.val(), userId);
       });
-      
       dispatch({
         type: FETCH_MATCH_DATA,
         payload: match
