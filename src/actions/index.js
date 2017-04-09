@@ -31,7 +31,6 @@ export function signUpUser(credentials) {
         browserHistory.push('/matchpage');
       })
       .catch(error => {
-        console.log("this is the error isn't it", error);
         dispatch(authError(error));
       });
   }
@@ -77,36 +76,33 @@ export function fetchUserData() {
 
 // Fetch their Match
 export function fetchMatchData(currentUser) {
+  let suitableUsers = [];
   return function(dispatch) {
       const { displayName, usersPaired, userId } = currentUser
-      const suitableUsers = [];
       Firebase.database().ref('users/').once('value', allUsers => {
           allUsers.forEach((user) => {
             if (usersPaired.indexOf(user.key) == -1) {
-              suitableUsers.push(user.val())
+              suitableUsers.push(user.val());
             }
           })
+      }).then(response => {
+        dispatch({
+          type: FETCH_MATCH_DATA,
+          payload: suitableUsers[0]
+        })
       })
-      const match = suitableUsers[Math.floor(Math.random()*suitableUsers.length)];
-      var usersPairedRef = Firebase.database().ref('users/' + userId + '/usersPaired');
-      usersPairedRef.on('value', function(snapshot) {
-        updateUsersPaired(match.key, snapshot.val(), userId);
-      });
-      dispatch({
-        type: FETCH_MATCH_DATA,
-        payload: match
-      })
+
   }
 }
 
-// Need to update both Users with the fact that the match is going
-// to be queued up. Update a value?
-export function updateUsersPaired(incValue, currentValue, userId) {
-  const newVal = currentValue.push(incValue)
-  Firebase.database().ref('users/' + userId).set({
-    usersPaired: newVal
-  })
-}
+// // Need to update both Users with the fact that the match is going
+// // to be queued up. Update a value?
+// export function updateUsersPaired(incValue, currentValue, userId) {
+//   const newVal = currentValue.push(incValue)
+//   Firebase.database().ref('users/' + userId).set({
+//     usersPaired: newVal
+//   })
+// }
 
 export function verifyAuth() {
   return function (dispatch) {  

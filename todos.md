@@ -20,6 +20,8 @@ Different "pages"
 Current Todos:
 Fetch a user who is not yourself, display them on the screen next to yourself, and then log an action from you to them, then log that you guys have "matched".
 
-Need a action that runs, and then fetches from within the set of the entire DB that is not you. OR someone you matched with before.
+Update a users 'match potentials' based during user creation one time/
+
+Dispatch an action that updates that array with 3 fields - active, 
 
   

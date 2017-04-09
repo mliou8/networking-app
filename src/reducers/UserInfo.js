@@ -13,10 +13,10 @@ export default function user(state = initialState, action) {
         userData: action.payload
       };
       
-    case FETCH_MATCH_DATA:    
+    case FETCH_MATCH_DATA:   
       return {
         ...state,
-        match: action.payload.match
+        matchArr: action.payload
       }
       
     default:

@@ -10,7 +10,7 @@ import Login from './containers/Login';
 import RequireAuth from './containers/RequireAuth';
 import Dashboard from './components/Dashboard';
 import MatchPage from './containers/MatchPageContainer';
-import {configureStore, loadState, saveState} from './store/configureStore';
+import {configureStore} from './store/configureStore';
 
 
 const store = configureStore();
