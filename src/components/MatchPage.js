@@ -1,11 +1,19 @@
 import React from 'react'
 
 class MatchPage extends React.Component {
+  constructor() {
+    super()
+    this.updatePair = this.updatePair.bind(this)
+  }
   
   componentWillMount() {
     if(this.props.userInfo) {
       this.props.actions.fetchMatchData(this.props.userInfo)
     }
+  }
+  
+  updatePair(currentUser, otherUser, action) {
+    return this.props.actions.updatePair(currentUser, otherUser, action)
   }
     
   render() {
@@ -23,8 +31,8 @@ class MatchPage extends React.Component {
         <h3>Email: {email}</h3>
           
       These are the Match Innit. Fetch the Data
-      <h1> This is them innit</h1> { match.displayName }
-      <h3></h3>
+      <h1> This is them innit </h1> { match.displayName }
+        <button> </button>
       </div>
     );
   }

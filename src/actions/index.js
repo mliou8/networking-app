@@ -16,7 +16,7 @@ function createUser(userId, name, email, imageUrl) {
   Firebase.database().ref('users/' + userId).set({
     displayName: name,
     email: email,
-    usersPaired: [userId],
+    usersPaired: [{ userId: userId }],
   });
 }
 
@@ -68,13 +68,13 @@ export function fetchUserData() {
     Firebase.database().ref('users/' + userUid).once('value', snapshot => {
       dispatch({
         type: FETCH_USER_DATA,
-        payload: snapshot.val()
+        payload: {id: snapshot.key, data: snapshot.val()}
       })
     });
   }
 }
 
-// Fetch their Match
+// Fetch their Match And Display It
 export function fetchMatchData(currentUser) {
   let suitableUsers = [];
   return function(dispatch) {
@@ -82,7 +82,7 @@ export function fetchMatchData(currentUser) {
       Firebase.database().ref('users/').once('value', allUsers => {
           allUsers.forEach((user) => {
             if (usersPaired.indexOf(user.key) == -1) {
-              suitableUsers.push(user.val());
+              suitableUsers.push({id: user.key, data: user.val()});
             }
           })
       }).then(response => {
@@ -91,7 +91,21 @@ export function fetchMatchData(currentUser) {
           payload: suitableUsers[0]
         })
       })
+  }
+}
 
+// Register their opinion about a match
+export function updatePair(currentUser, otherUser, action) {
+  return function (dispatch) {
+    const { usersPaired, userId } = currentUser
+    const newPair = {
+      userId: otherUser,
+      action: action
+    }
+    usersPaired.push(newPair)
+    Firebase.database().ref().child('users/' + userId).set({
+      usersPaired: usersPaired,
+    })
   }
 }
 
