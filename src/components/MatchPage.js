@@ -17,11 +17,8 @@ class MatchPage extends React.Component {
   }
     
   render() {
-    const { displayName, email } = this.props.userInfo
-    let match = {}
-    if (this.props.matchInfo) {
-      match = this.props.matchInfo
-    }
+    const { displayName, email } = this.props.userInfo.data
+    const { data, id } = this.props.matchInfo
     
     return (
       <div>
@@ -31,8 +28,9 @@ class MatchPage extends React.Component {
         <h3>Email: {email}</h3>
           
       These are the Match Innit. Fetch the Data
-      <h1> This is them innit </h1> { match.displayName }
-        <button> </button>
+      <h1> This is them innit </h1>
+        <h3>Display Name: {data.displayName}</h3>
+        <h3>Email: {data.email}</h3>
       </div>
     );
   }

@@ -24,4 +24,24 @@ Update a users 'match potentials' based during user creation one time/
 
 Dispatch an action that updates that array with 3 fields - active, 
 
-  
+Global object - 
+
+//user class globally accessible
+
+//global singleton class
+//library
+
+//put everything in an object
+
+hash keys
+
+pair of IDs leads to a value? like 1, 2, 3
+
+2 IDs, A and B
+
+A, B tells you A’s action to B
+B, A tells you B’s action to A
+
+Run that check everytime someone indicates a match
+
+
