@@ -16,7 +16,7 @@ function createUser(userId, name, email, imageUrl) {
   Firebase.database().ref('users/' + userId).set({
     displayName: name,
     email: email,
-    usersPaired: [{ userId: userId }],
+    usersPaired: [userId],
   });
 }
 
@@ -28,6 +28,8 @@ export function signUpUser(credentials) {
       })
       .then(response => {
         dispatch(authUser());
+        dispatch(fetchUserData())
+      }).then(response => {
         browserHistory.push('/matchpage');
       })
       .catch(error => {
@@ -96,16 +98,24 @@ export function fetchMatchData(currentUser) {
 }
 
 // Register their opinion about a match
+// Update both users w/ the other user in their usersPaired
+// Register the one way binding in the database table
+// Helper function to check if there's a match
 export function updatePair(currentUser, otherUser, action) {
   return function (dispatch) {
-    const { usersPaired, userId } = currentUser
+    console.log("Entering updatePair")
+    currentUser.data.usersPaired.push(otherUser.id)
+    otherUser.data.usersPaired.push(currentUser.id)
+    const hashKey = [currentUser.id, otherUser.id]
     const newPair = {
-      userId: otherUser,
+      key: hashKey,
       action: action
     }
-    usersPaired.push(newPair)
-    Firebase.database().ref().child('users/' + userId).set({
-      usersPaired: usersPaired,
+    Firebase.database().ref().child('users/' + currentUser.id).set({
+      usersPaired: currentUser.data.usersPaired
+    })
+    Firebase.database().ref().child('users/' + otherUser.id).set({
+      usersPaired: otherUser.data.usersPaired
     })
   }
 }
