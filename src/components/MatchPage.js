@@ -35,7 +35,7 @@ class MatchPage extends React.Component {
         <h3>Display Name: {data.displayName}</h3>
         <h3>Email: {data.email}</h3>
         {!this.state.submitVote ? 
-          <button onClick={() => this.updatePair(this.props.userInfo, this.props.matchInfo)}>This is the action that you are seeking.</button>
+          <button onClick={() => this.updatePair(this.props.userInfo, this.props.matchInfo, 'yes')}>This is the action that you are seeking.</button>
           : <div>Thanks for letting us know! Check back in tomorrow</div>
         } 
       </div>

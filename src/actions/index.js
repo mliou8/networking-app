@@ -103,31 +103,20 @@ export function fetchMatchData(currentUser) {
 // Helper function to check if there's a match
 export function updatePair(currentUser, otherUser, action) {
   return function (dispatch) {
-    console.log("Entering updatePair")
     currentUser.data.usersPaired.push(otherUser.id)
     otherUser.data.usersPaired.push(currentUser.id)
-    const hashKey = [currentUser.id, otherUser.id]
     const newPair = {
-      key: hashKey,
+      key: [currentUser.id, otherUser.id],
       action: action
     }
-    Firebase.database().ref().child('users/' + currentUser.id).set({
-      usersPaired: currentUser.data.usersPaired
-    })
-    Firebase.database().ref().child('users/' + otherUser.id).set({
-      usersPaired: otherUser.data.usersPaired
-    })
+    const newPairKey = Firebase.database().ref().child('pairRecords').push().key;
+    var updates = {};
+    updates['/pairRecords/' + newPairKey] = newPair;
+    updates['/users/' + currentUser.id + '/usersPaired'] = currentUser.data.usersPaired
+    updates['/users/' + otherUser.id + '/usersPaired'] = currentUser.data.usersPaired
+    return Firebase.database().ref().update(updates);
   }
 }
-
-// // Need to update both Users with the fact that the match is going
-// // to be queued up. Update a value?
-// export function updateUsersPaired(incValue, currentValue, userId) {
-//   const newVal = currentValue.push(incValue)
-//   Firebase.database().ref('users/' + userId).set({
-//     usersPaired: newVal
-//   })
-// }
 
 export function verifyAuth() {
   return function (dispatch) {  
