@@ -8,7 +8,7 @@ import * as Actions from '../actions';
     return {
       authenticated: state.auth.authenticated,
       userInfo: state.user.userData,
-      matchInfo: state.user.matchArr
+      matchInfo: state.user.matchArr || ''
     };
   }
 

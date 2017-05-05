@@ -12,10 +12,11 @@ const config = firebaseKey;
 Firebase.initializeApp(config);
 
 //Create user in realtime db
-function createUser(userId, name, email, imageUrl) {
+function createUser(userId, name, email, tags) {
   Firebase.database().ref('users/' + userId).set({
     displayName: name,
     email: email,
+    tags: [...tags],
     usersPaired: [userId],
   });
 }
@@ -114,9 +115,21 @@ export function updatePair(currentUser, otherUser, action) {
     updates['/pairRecords/' + newPairKey] = newPair;
     updates['/users/' + currentUser.id + '/usersPaired'] = currentUser.data.usersPaired
     updates['/users/' + otherUser.id + '/usersPaired'] = currentUser.data.usersPaired
-    return Firebase.database().ref().update(updates);
+    Firebase.database().ref().update(updates)
+    .then(response => {
+      checkMatch(currentUser.id, otherUser.id)
+    })
   }
 }
+
+//Check for Match on both sides
+function checkMatch(userOne, userTwo) {
+  Firebase.database().ref().child('pairRecords').once('value', allPairs => {
+    allPairs.forEach((pair) =>  {
+      console.log("pair is ", pair.val())
+    })
+  }) 
+} 
 
 export function verifyAuth() {
   return function (dispatch) {  

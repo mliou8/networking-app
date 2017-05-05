@@ -22,8 +22,9 @@ class MatchPage extends React.Component {
   
   render() {
     const { displayName, email } = this.props.userInfo.data
-    const { data, id } = this.props.matchInfo
-    
+    let matchData
+    const { data } = this.props.matchInfo
+    matchData = data || ''
     return (
       <div>
       Hey Welcome to the app innit, today your first match is here:
@@ -32,10 +33,13 @@ class MatchPage extends React.Component {
         <h3>Email: {email}</h3>
       These are the Match Innit. Fetch the Data
       <h1> This is them innit </h1>
-        <h3>Display Name: {data.displayName}</h3>
-        <h3>Email: {data.email}</h3>
+        <h3>Display Name: {matchData.displayName || 'N/A' } </h3>
+        <h3>Email: {matchData.email || 'N/A' } </h3>
         {!this.state.submitVote ? 
-          <button onClick={() => this.updatePair(this.props.userInfo, this.props.matchInfo, 'yes')}>This is the action that you are seeking.</button>
+          <div>
+            <button onClick={() => this.updatePair(this.props.userInfo, this.props.matchInfo, 'yes')}>This is the yes.</button>
+            <button onClick={() => this.updatePair(this.props.userInfo, this.props.matchInfo, 'no')}>This is the no.</button>
+          </div>
           : <div>Thanks for letting us know! Check back in tomorrow</div>
         } 
       </div>
