@@ -12,11 +12,10 @@ const config = firebaseKey;
 Firebase.initializeApp(config);
 
 //Create user in realtime db
-function createUser(userId, name, email, tags) {
+function createUser(userId, name, email) {
   Firebase.database().ref('users/' + userId).set({
     displayName: name,
     email: email,
-    tags: [...tags],
     usersPaired: [userId],
   });
 }
@@ -29,7 +28,7 @@ export function signUpUser(credentials) {
       })
       .then(response => {
         dispatch(authUser());
-        dispatch(fetchUserData())
+        dispatch(fetchUserData());
       }).then(response => {
         browserHistory.push('/matchpage');
       })
@@ -107,28 +106,48 @@ export function updatePair(currentUser, otherUser, action) {
     currentUser.data.usersPaired.push(otherUser.id)
     otherUser.data.usersPaired.push(currentUser.id)
     const newPair = {
-      key: [currentUser.id, otherUser.id],
-      action: action
+      hashID: [currentUser.id, otherUser.id],
+      action: action,
+      match: null
     }
     const newPairKey = Firebase.database().ref().child('pairRecords').push().key;
-    var updates = {};
+    let updates = {};
     updates['/pairRecords/' + newPairKey] = newPair;
     updates['/users/' + currentUser.id + '/usersPaired'] = currentUser.data.usersPaired
-    updates['/users/' + otherUser.id + '/usersPaired'] = currentUser.data.usersPaired
     Firebase.database().ref().update(updates)
     .then(response => {
-      checkMatch(currentUser.id, otherUser.id)
+      if (action === 'yes') {
+        checkMatch(currentUser.id, otherUser.id)
+      }
     })
   }
 }
 
 //Check for Match on both sides
 function checkMatch(userOne, userTwo) {
+  let updates = {};
+  let match = false;
   Firebase.database().ref().child('pairRecords').once('value', allPairs => {
     allPairs.forEach((pair) =>  {
-      console.log("pair is ", pair.val())
+      if(pair.val().hashID[0] == userTwo && pair.val().hashID[1] == userOne && pair.val().action == 'yes') {
+        match = true;
+        console.log("a match happened 1")
+        let newPair = pair.val();
+        newPair.match = true;
+        updates['/pairRecords/' + pair.key ] = newPair
+      }
+      if(pair.val().hashID[0] == userOne && pair.val().hashID[1] == userTwo && match) {
+        console.log("a match happened 2")
+        let newPair = pair.val();
+        newPair.match = true;
+        updates['/pairRecords/' + pair.key] = newPair
+      }
     })
-  }) 
+    Firebase.database().ref().update(updates)
+    .then(response => {
+      console.log('Updated both pairs')
+    })
+  })
 } 
 
 export function verifyAuth() {

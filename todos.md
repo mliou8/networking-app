@@ -18,30 +18,12 @@ Different "pages"
 
 
 Current Todos:
-Fetch a user who is not yourself, display them on the screen next to yourself, and then log an action from you to them, then log that you guys have "matched".
+<!-- Fetch a user who is not yourself, display them on the screen next to yourself, and then log an action from you to them, then log that you guys have "matched".
 
-Update a users 'match potentials' based during user creation one time/
+Update a users 'match potentials' based during user creation one time/ -->
 
-Dispatch an action that updates that array with 3 fields - active, 
+<!-- Dispatch an action that updates that array with 3 fields - active,  -->
 
-Global object - 
-
-//user class globally accessible
-
-//global singleton class
-//library
-
-//put everything in an object
-
-hash keys
-
-pair of IDs leads to a value? like 1, 2, 3
-
-2 IDs, A and B
-
-A, B tells you A’s action to B
-B, A tells you B’s action to A
-
-Run that check everytime someone indicates a match
+Check for whether or not the other person also liked u. If they did, then display a match. if they didn't, then say. Ok check back in x amount of time.
 
 

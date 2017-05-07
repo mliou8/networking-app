@@ -18,6 +18,7 @@ class MatchPage extends React.Component {
   updatePair(currentUser, otherUser, action) {
     this.setState({submitVote: true})
     this.props.actions.updatePair(currentUser, otherUser, action)
+    this.props.actions.fetchMatchData(this.props.userInfo)
   }
   
   render() {
