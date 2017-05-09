@@ -131,22 +131,17 @@ function checkMatch(userOne, userTwo) {
     allPairs.forEach((pair) =>  {
       if(pair.val().hashID[0] == userTwo && pair.val().hashID[1] == userOne && pair.val().action == 'yes') {
         match = true;
-        console.log("a match happened 1")
         let newPair = pair.val();
         newPair.match = true;
         updates['/pairRecords/' + pair.key ] = newPair
       }
       if(pair.val().hashID[0] == userOne && pair.val().hashID[1] == userTwo && match) {
-        console.log("a match happened 2")
         let newPair = pair.val();
         newPair.match = true;
         updates['/pairRecords/' + pair.key] = newPair
       }
     })
     Firebase.database().ref().update(updates)
-    .then(response => {
-      console.log('Updated both pairs')
-    })
   })
 } 
 

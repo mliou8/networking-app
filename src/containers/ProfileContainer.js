@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
-import MatchPage from '../components/MatchPage'
+import Profile from '../components/Profile'
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 
-
+  
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated,
     userInfo: state.user.userData,
     matchInfo: state.user.matchArr || ''
   };
@@ -21,5 +20,5 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MatchPage);
+)(Profile);
 

@@ -8,7 +8,7 @@ import Home from './containers/Home';
 import SignUp from './containers/Signup';
 import Login from './containers/Login';
 import RequireAuth from './containers/RequireAuth';
-import Dashboard from './components/Dashboard';
+import Profile from './containers/ProfileContainer';
 import MatchPage from './containers/MatchPageContainer';
 import {configureStore} from './store/configureStore';
 
@@ -21,7 +21,7 @@ ReactDOM.render(
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
       <Route path="signup" component={SignUp}/>
-      <Route path="dashboard" component={Dashboard}/>
+      <Route path="profile" component={Profile}/>
       <Route path="login" component={Login}/>
       <Route path="matchpage" component={RequireAuth(MatchPage)}/>
     </Route>

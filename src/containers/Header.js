@@ -11,7 +11,7 @@ class Header extends React.Component {
     if (this.props.authenticated){
       return [
         <li className="nav-item" key={1}>
-          <Link className="nav-link" to="/dashboard"> Dashboard </Link>
+          <Link className="nav-link" to="/profile"> Profile </Link>
         </li>,
         <li className="nav-item" key={2}>
           <Link className="nav-link" to="/matchpage"> Match Page </Link>
