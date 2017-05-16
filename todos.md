@@ -24,6 +24,7 @@ Update a users 'match potentials' based during user creation one time/ -->
 
 <!-- Dispatch an action that updates that array with 3 fields - active,  -->
 
-Check for whether or not the other person also liked u. If they did, then display a match. if they didn't, then say. Ok check back in x amount of time.
+<!-- Check for whether or not the other person also liked u. If they did, then display a match. if they didn't, then say. Ok check back in x amount of time. -->
 
+Set up the user creation data to account for 'the tags'. It's in the profile data, and you can add or remove them properly.
 

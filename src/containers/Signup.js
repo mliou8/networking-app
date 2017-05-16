@@ -23,11 +23,31 @@ const validate = values => {
   return errors;
 }
 
+const tagOptions = [
+  'SupportWomeninTech', 'Friendly', 'FullstackAlumni', 'GivingBack', 'Networking', 'LookingForWork'
+]
+
 class Signup extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      selectedTags: []
+    }
+    this.updateTags = this.updateTags.bind(this)
+  }
+  
+  updateTags(newTag) {
+    let newArr = this.state.selectedTags
+    newArr.push(newTag)
+    this.setState({selectedTags: newArr})
+    let idx = tagOptions.indexOf(newTag)
+    tagOptions = tagOptions.splice(idx, idx + 1)
+  }
+  
   handleFormSubmit = (values) => {
     this.props.signUpUser(values);
   };
-
+  
   renderField = ({
     input,
     label,
@@ -58,20 +78,24 @@ class Signup extends React.Component {
     return <div></div>;
   }
 
+
   render() {
     return (
       <div className="container">
-        <div className="col-md-6 col-md-offset-3">
+        <div className="col-md-3 col-md-offset-3">
           <h2 className="text-center">Sign Up</h2>
-          {this.renderAuthenticationError()}
           <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
             <Field name="name" type="text" component={this.renderField} label="Name"/>
             <Field name="email" type="text" component={this.renderField} label="Email"/>
             <Field name="password" type="password" component={this.renderField} label="Password"/>
             <Field name="passwordConfirmation" type="password" component={this.renderField} label="Password Confirmation"/>
-            <Field name="passwordConfirmation" type="password" component={this.renderField} label="Password Confirmation"/>
-            <Field name="comment" type="textarea" component={this.renderField} label="Tags of Interest"/>
-            <button action="submit" className="btn btn-primary">Sign up</button>
+            { tagOptions.map((tag, idx) => {
+              return (
+                <button key={idx} type="button" onClick={() =>{this.updateTags(tag)}}>{tag}</button>
+              )
+            })}  
+            {this.state.selectedTags}
+            <div><button action="submit" className="btn btn-primary">Sign up</button></div>
           </form>
         </div>
       </div>
