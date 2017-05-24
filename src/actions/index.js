@@ -139,6 +139,8 @@ function checkMatch(userOne, userTwo) {
         let newPair = pair.val();
         newPair.match = true;
         updates['/pairRecords/' + pair.key] = newPair
+        updates['/users/' + userOne + '/usersMatched']
+        updates['/users/' + userTwo + '/usersMatched']
       }
     })
     Firebase.database().ref().update(updates)

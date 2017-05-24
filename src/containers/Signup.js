@@ -23,25 +23,48 @@ const validate = values => {
   return errors;
 }
 
-const tagOptions = [
-  'SupportWomeninTech', 'Friendly', 'FullstackAlumni', 'GivingBack', 'Networking', 'LookingForWork'
-]
+
 
 class Signup extends React.Component {
   constructor() {
     super()
     this.state = {
-      selectedTags: []
+      selectedTags: {
+        'SupportWomeninTech': false, 
+        'Friendly': false, 
+        'FullstackAlumni': false, 
+        'GivingBack': false, 
+        'Networking': false,
+        'LookingForWork': false
+      },
+      tagOptions: {
+          'SupportWomeninTech': true, 
+          'Friendly': true, 
+          'FullstackAlumni': true, 
+          'GivingBack': true, 
+          'Networking': true,
+          'LookingForWork': true
+        }
     }
-    this.updateTags = this.updateTags.bind(this)
+    
+    this.addTags = this.addTags.bind(this)
+    this.removeTags = this.removeTags.bind(this)
   }
   
-  updateTags(newTag) {
-    let newArr = this.state.selectedTags
-    newArr.push(newTag)
-    this.setState({selectedTags: newArr})
-    let idx = tagOptions.indexOf(newTag)
-    tagOptions = tagOptions.splice(idx, idx + 1)
+  addTags(tag) {
+    let tagOptions = this.state.tagOptions
+    let selectedTags = this.state.selectedTags
+    tagOptions[tag] = false
+    selectedTags[tag] = true
+    this.setState({tagOptions: tagOptions, selectedTags: selectedTags})
+  }
+  
+  removeTags(tag) {
+    let tagOptions = this.state.tagOptions
+    let selectedTags = this.state.selectedTags
+    tagOptions[tag] = true
+    selectedTags[tag] = false
+    this.setState({tagOptions: tagOptions, selectedTags: selectedTags})
   }
   
   handleFormSubmit = (values) => {
@@ -52,6 +75,7 @@ class Signup extends React.Component {
     input,
     label,
     type,
+    value,
     meta: {
       touched,
       error
@@ -62,7 +86,7 @@ class Signup extends React.Component {
       : ''}`}>
       <label className="control-label">{label}</label>
       <div>
-        <input {...input} placeholder={label} className="form-control" type={type}/>
+        <input {...input} placeholder={label} className="form-control" type={type} value={value} />
         {touched && error && <div className="help-block">
           {error}</div>}
       </div>
@@ -80,6 +104,14 @@ class Signup extends React.Component {
 
 
   render() {
+    
+    let selectedTags = [];
+    Object.keys(this.state.selectedTags).map((key)=> { 
+      if (this.state.selectedTags[key]){
+        selectedTags.push(key)
+      }
+    })
+    
     return (
       <div className="container">
         <div className="col-md-3 col-md-offset-3">
@@ -89,12 +121,28 @@ class Signup extends React.Component {
             <Field name="email" type="text" component={this.renderField} label="Email"/>
             <Field name="password" type="password" component={this.renderField} label="Password"/>
             <Field name="passwordConfirmation" type="password" component={this.renderField} label="Password Confirmation"/>
-            { tagOptions.map((tag, idx) => {
-              return (
-                <button key={idx} type="button" onClick={() =>{this.updateTags(tag)}}>{tag}</button>
-              )
-            })}  
-            {this.state.selectedTags}
+            <div className="btn-group">
+              { 
+                  Object.keys(this.state.tagOptions).map((key)=> {
+                    if (this.state.tagOptions[key]){
+                      return (
+                        <button type="button" onClick={() =>{this.addTags(key)}}>{key}</button>
+                      )
+                    }
+                  })
+              }
+            </div>  
+            <div>Placeholder</div>
+              { 
+                  Object.keys(this.state.selectedTags).map((key)=> {
+                    if (this.state.selectedTags[key]){
+                      return (
+                        <button type="button" onClick={() =>{this.removeTags(key)}}>{key}</button>
+                      )
+                    }
+                  })
+              }
+              <input value={selectedTags}></input>
             <div><button action="submit" className="btn btn-primary">Sign up</button></div>
           </form>
         </div>
