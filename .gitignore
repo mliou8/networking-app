@@ -1,3 +1,4 @@
 node_modules
-env_variables
 todos.md
+.env
+env_variables

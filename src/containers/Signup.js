@@ -2,6 +2,8 @@ import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import * as Actions from '../actions';
+import {Helmet} from 'react-helmet'
+import {linkedinKey} from '../env_variables/api-keys';
 
 const validate = values => {
   const errors = {};
@@ -26,6 +28,7 @@ const validate = values => {
 
 
 class Signup extends React.Component {
+  
   constructor() {
     super()
     this.state = {
@@ -50,6 +53,7 @@ class Signup extends React.Component {
     this.addTags = this.addTags.bind(this)
     this.removeTags = this.removeTags.bind(this)
   }
+
   
   addTags(tag) {
     let tagOptions = this.state.tagOptions
@@ -104,7 +108,6 @@ class Signup extends React.Component {
 
 
   render() {
-    
     let selectedTags = [];
     Object.keys(this.state.selectedTags).map((key)=> { 
       if (this.state.selectedTags[key]){
@@ -114,6 +117,13 @@ class Signup extends React.Component {
     
     return (
       <div className="container">
+        <Helmet>
+          <script type="text/javascript" src="//platform.linkedin.com/in.js">
+            {
+              `api_key: ${linkedinKey}`
+            }
+          </script>
+        </Helmet>
         <div className="col-md-3 col-md-offset-3">
           <h2 className="text-center">Sign Up</h2>
           <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
@@ -145,6 +155,7 @@ class Signup extends React.Component {
               <input value={selectedTags}></input>
             <div><button action="submit" className="btn btn-primary">Sign up</button></div>
           </form>
+          <script type="in/Login"></script>
         </div>
       </div>
     );

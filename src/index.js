@@ -12,7 +12,6 @@ import Profile from './containers/ProfileContainer';
 import MatchPage from './containers/MatchPageContainer';
 import {configureStore} from './store/configureStore';
 
-
 const store = configureStore();
 
 ReactDOM.render(

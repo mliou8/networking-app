@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import * as Actions from '../actions';
+import {Helmet} from 'react-helmet';
 
 class Header extends React.Component {
   handleSignOut() {
@@ -33,16 +34,18 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <Link className="navbar-brand" to="/">ReferralBuddy</Link>
+      <div>
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <Link className="navbar-brand" to="/">ReferralBuddy</Link>
+            </div>
+             <ul className="nav navbar-nav navbar-right">
+               { this.renderAuthLinks() }
+             </ul>
           </div>
-           <ul className="nav navbar-nav navbar-right">
-             { this.renderAuthLinks() }
-           </ul>
-        </div>
-      </nav>
+        </nav>
+      </div>
     );
   }
 }
