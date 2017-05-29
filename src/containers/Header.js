@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import * as Actions from '../actions';
-import {Helmet} from 'react-helmet';
 
 class Header extends React.Component {
   handleSignOut() {
@@ -28,6 +27,9 @@ class Header extends React.Component {
         </li>,
         <li className="nav-item" key={2}>
           <Link className="nav-link" to="/signup">Sign Up</Link>
+        </li>,
+        <li className="nav-item" key={3}>
+          <Link className="nav-link" to="/linkedin">Linkedin</Link>
         </li>
       ]
     }

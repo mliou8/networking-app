@@ -7,6 +7,7 @@ import App from './components/App';
 import Home from './containers/Home';
 import SignUp from './containers/Signup';
 import Login from './containers/Login';
+import Linkedin from './containers/LinkedinContainer';
 import RequireAuth from './containers/RequireAuth';
 import Profile from './containers/ProfileContainer';
 import MatchPage from './containers/MatchPageContainer';
@@ -22,6 +23,7 @@ ReactDOM.render(
       <Route path="signup" component={SignUp}/>
       <Route path="profile" component={Profile}/>
       <Route path="login" component={Login}/>
+      <Route path="linkedin" component={Linkedin}/>
       <Route path="matchpage" component={RequireAuth(MatchPage)}/>
     </Route>
   </Router>

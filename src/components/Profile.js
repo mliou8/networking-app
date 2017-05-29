@@ -2,10 +2,6 @@ import React from 'react';
 
 
 class Profile extends React.Component {
-  constructor() {
-    super()
-  }
-  
   render() {
     const {displayName, email} = this.props.userInfo.data 
     return (
