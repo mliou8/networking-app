@@ -160,6 +160,7 @@ export function verifyAuth() {
 }
 
 export function authUser() {
+  console.log("Authenticating the User")
   return {
     type: AUTH_USER
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import * as Actions from '../actions';
+import Linkedin from './LinkedinContainer'
 
 const validate = values => {
   const errors = {};
@@ -115,6 +116,7 @@ class Signup extends React.Component {
       <div className="container">
         <div className="col-md-3 col-md-offset-3">
           <h2 className="text-center">Sign Up</h2>
+          <Linkedin></Linkedin>
           <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
             <Field name="name" type="text" component={this.renderField} label="Name"/>
             <Field name="email" type="text" component={this.renderField} label="Email"/>

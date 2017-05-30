@@ -1,12 +1,12 @@
 import React from 'react';
 
-
 class Profile extends React.Component {
   render() {
-    const {displayName, email} = this.props.userInfo.data 
+    const {displayName, email, photoUrl} = this.props.userInfo
+    
     return (
       <div>
-        <div>This is your displayName {displayName} </div>
+        <div>This is your Name {displayName} </div>
         <div>This is your email {email} </div>
       </div>
     );

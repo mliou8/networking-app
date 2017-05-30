@@ -12,14 +12,20 @@ class Linkedin extends React.Component {
 
 
   LIlogin() {
+    console.log("Starting Linkedin 1")
     window.IN.UI.Authorize().params({"scope":["r_basicprofile", "r_emailaddress"]}).place()
     window.IN.Event.on(window.IN, 'auth', this.getProfileData);
+    if (window.IN.User.isAuthorized()) {
+      console.log("true")
+    } else {
+      console.log("False")
+    }
   }
   
   getProfileData(){
     window.IN.API.Profile("me").fields("id,firstName,lastName,email-address,picture-urls::(original),public-profile-url,location:(name)")
     .result((me) => {
-      console.log('me ', me.values[0])
+      console.log("starting linkedin 2 ", me.values[0])
       const { emailAddress, firstName, lastName } = me.values[0]
       const password = 'test123'
       const name = firstName + ' ' + lastName
@@ -34,9 +40,10 @@ class Linkedin extends React.Component {
         <Helmet>
           <script type="text/javascript" src="//platform.linkedin.com/in.js">
             {
-              `api_key: ${linkedinKey}`
+              `api_key: ${linkedinKey}
+               authorize: true`
             }
-          </script>f
+          </script>
         </Helmet>
         Welcome to Linkedin page
         <button onClick={()=> this.LIlogin()}> Sign in with LinkedIn It could Be Mandatory</button>
