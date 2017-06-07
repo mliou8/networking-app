@@ -16,6 +16,7 @@ class Home extends React.Component {
     
     return (
       <div>
+        This is the Landing Page. Michael's face introduces you to the site.
         <Profile userInfo={userInfo}>Hello</Profile>
       </div>
     );

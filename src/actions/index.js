@@ -80,7 +80,7 @@ export function fetchUserData() {
 export function fetchMatchData(currentUser) {
   let suitableUsers = [];
   return function(dispatch) {
-      const { data, id } = currentUser
+      const { data } = currentUser
       const { displayName, email, usersPaired } = data
       Firebase.database().ref('users/').once('value', allUsers => {
           allUsers.forEach((user) => {

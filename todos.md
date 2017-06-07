@@ -12,9 +12,12 @@ Connect their linkedin profiles. Make sure to pass in a reference that they were
 
 Different "pages"
 
-0 Signup pages
-0 Profile Page (modify your info)
-0 your match page / no matches today / you matched
+0 Landing Page: See the profile of Michael the hardcoded user. 
+  Either Click Routes you to Signup Page 
+  either through Linkedin Or Custom
+1 Signup Page (Auth with Linkedin), fill in tags data regardless.
+2 your match page / no matches today / you matched
+3 Profile Page (modify your info)
 
 
 Current Todos:
@@ -26,5 +29,17 @@ Update a users 'match potentials' based during user creation one time/ -->
 
 <!-- Check for whether or not the other person also liked u. If they did, then display a match. if they didn't, then say. Ok check back in x amount of time. -->
 
-Set up the user creation data to account for 'the tags'. It's in the profile data, and you can add or remove them properly.
+<!-- Set up the user creation data to account for 'the tags'. It's in the profile data, and you can add or remove them properly. -->
+
+<!-- Set up authorization with linkedin integration -->
+
+//Allow user to create a account w/ Linkedin. Add additional data afterwards
+If User is already defined, then need to be able to 
+(such as required data)
+
+//Allow user to log back in using linkedin.
+
+Allow user to do two step process to create an account. First, create a name, email, and password. 
+
+Then, add a photo, tags, and bio.
 

@@ -46,7 +46,7 @@ class Linkedin extends React.Component {
           </script>
         </Helmet>
         Welcome to Linkedin page
-        <button onClick={()=> this.LIlogin()}> Sign in with LinkedIn It could Be Mandatory</button>
+        <button onClick={()=> this.LIlogin()}> Shorten the Process with Linkedin</button>
       </div>
     );
   }
