@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
+import './styles/index.css';
 
 import App from './components/App';
 import Home from './containers/Home';
 import SignUp from './containers/Signup';
 import Login from './containers/Login';
-import Facebook from './containers/FacebookContainer';
+import Complete from './containers/CompleteContainer';
 import RequireAuth from './containers/RequireAuth';
 import Profile from './containers/ProfileContainer';
 import MatchPage from './containers/MatchPageContainer';
@@ -23,7 +24,7 @@ ReactDOM.render(
       <Route path="signup" component={SignUp}/>
       <Route path="profile" component={Profile}/>
       <Route path="login" component={Login}/>
-      <Route path="facebook" component={Facebook}/>
+      <Route path="profile-complete" component={Complete}/>
       <Route path="matchpage" component={RequireAuth(MatchPage)}/>
     </Route>
   </Router>

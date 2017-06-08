@@ -1,22 +1,30 @@
 .app {
-    margin: 3em auto;
-    width: 90%;
-}
+  margin: 3em auto;
+  width: 90%;
+  background-color: red; }
 
 input {
-    display: block;
-    font-size: 22px;
-    height: 50px;
-    margin: 0 auto;
-    text-align: left;
-    width: 25%;
-}
-
-.tag-section {
-  
-}
+  display: block;
+  font-size: 22px;
+  height: 50px;
+  margin: 0 auto;
+  text-align: left;
+  width: 25%; }
 
 .tag-option {
   background-color: #FFFBFF;
-  margin: 5px;
-}
+  margin: 5px; }
+
+.profile-container {
+  border-radius: 50%;
+  margin-top: 0;
+  border: 1px solid black;
+  margin-bottom: 20px;
+  height: 250px;
+  width: 250px;
+  overflow: hidden; }
+  .profile-container img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block; }

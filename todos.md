@@ -33,9 +33,9 @@ Update a users 'match potentials' based during user creation one time/ -->
 
 <!-- Set up authorization with linkedin integration -->
 
-//Allow user to create a account w/ Linkedin. Add additional data afterwards
+<!-- //Allow user to create a account w/ Linkedin. Add additional data afterwards
 If User is already defined, then need to be able to 
-(such as required data)
+(such as required data) -->
 
 //Allow user to log back in using linkedin.
 

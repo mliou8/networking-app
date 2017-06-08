@@ -1,0 +1,21 @@
+.app {
+    margin: 3em auto;
+    width: 90%;
+    background-color: red;
+}
+
+input {
+  display: block;
+  font-size: 22px;
+  height: 50px;
+  margin: 0 auto;
+  text-align: left;
+  width: 25%;
+}
+
+.tag-option {
+  background-color: #FFFBFF;
+  margin: 5px;
+}
+
+@import 'styles/Profile/Profile.scss';

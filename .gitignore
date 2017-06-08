@@ -2,3 +2,4 @@ node_modules
 todos
 .env
 env_variables
+src/**/*.css

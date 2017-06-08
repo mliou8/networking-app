@@ -30,7 +30,7 @@ export function signUpUser(credentials) {
         dispatch(authUser());
         dispatch(fetchUserData());
       }).then(response => {
-        browserHistory.push('/matchpage');
+        browserHistory.push('/profile-complete');
       })
       .catch(error => {
         dispatch(authError(error));
@@ -84,7 +84,7 @@ export function fetchMatchData(currentUser) {
       const { displayName, email, usersPaired } = data
       Firebase.database().ref('users/').once('value', allUsers => {
           allUsers.forEach((user) => {
-            if (usersPaired.indexOf(user.key) == -1) {
+            if (usersPaired.indexOf(user.key) === -1) {
               suitableUsers.push({id: user.key, data: user.val()});
             }
           })
@@ -129,13 +129,13 @@ function checkMatch(userOne, userTwo) {
   let match = false;
   Firebase.database().ref().child('pairRecords').once('value', allPairs => {
     allPairs.forEach((pair) =>  {
-      if(pair.val().hashID[0] == userTwo && pair.val().hashID[1] == userOne && pair.val().action == 'yes') {
+      if(pair.val().hashID[0] === userTwo && pair.val().hashID[1] === userOne && pair.val().action == 'yes') {
         match = true;
         let newPair = pair.val();
         newPair.match = true;
         updates['/pairRecords/' + pair.key ] = newPair
       }
-      if(pair.val().hashID[0] == userOne && pair.val().hashID[1] == userTwo && match) {
+      if(pair.val().hashID[0] === userOne && pair.val().hashID[1] === userTwo && match) {
         let newPair = pair.val();
         newPair.match = true;
         updates['/pairRecords/' + pair.key] = newPair
