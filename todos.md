@@ -37,9 +37,14 @@ Update a users 'match potentials' based during user creation one time/ -->
 If User is already defined, then need to be able to 
 (such as required data) -->
 
-//Allow user to log back in using linkedin.
+<!-- //Allow user to log back in using linkedin. -->
 
 Allow user to do two step process to create an account. First, create a name, email, and password. 
 
 Then, add a photo, tags, and bio.
+
+-- Photo needs to be able to upload something for them (auto saves or updates)
+-- tags needs to be added, and then you hit save
+-- Bio... 1 line 
+
 

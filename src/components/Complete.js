@@ -1,5 +1,7 @@
 import React from 'react';
 import blank from '../img/blank.png'
+import firebase from 'firebase';
+import FileUploader from 'react-firebase-file-uploader';
 
 class Complete extends React.Component {
   constructor() {
@@ -22,12 +24,30 @@ class Complete extends React.Component {
         'Networking': true,
         'LookingForWork': true
       },
+      avatar: '',
+      isUploading: false,
+      progress: 0,
+      avatarURL: blank,
       profileComplete: false
     }
       
     this.addTags = this.addTags.bind(this)
     this.removeTags = this.removeTags.bind(this)
   }
+  
+  handleUploadStart = () => this.setState({isUploading: true, progress: 0});
+  
+  handleProgress = (progress) => this.setState({progress});
+  
+  handleUploadError = (error) => {
+    this.setState({isUploading: false});
+    console.error(error);
+  }
+  
+  handleUploadSuccess = (filename) => {
+    this.setState({avatar: filename, progress: 100, isUploading: false});
+    firebase.storage().ref(`images/${this.props.userInfo.id}/`).child(filename).getDownloadURL().then(url => this.setState({avatarURL: url}));
+  };
   
   addTags(tag) {
     let tagOptions = this.state.tagOptions
@@ -54,9 +74,25 @@ class Complete extends React.Component {
     })
     return (
       <div>
-        <div className="profile-container">
-          <img src={blank} alt={"blank"}></img>
-        </div>
+        <form>
+          {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
+          {this.state.avatarURL &&
+            <div className="profile-container">
+              <img src={this.state.avatarURL} alt="profile-pic" />
+            </div>
+          }
+        <label>Avatar:</label>
+        <FileUploader
+          accept="image/*"
+          name="avatar"
+          randomizeFilename
+          storageRef={firebase.storage().ref(`images/${this.props.userInfo.id}`)}
+          onUploadStart={this.handleUploadStart}
+          onUploadError={this.handleUploadError}
+          onUploadSuccess={this.handleUploadSuccess}
+          onProgress={this.handleProgress}
+        />
+      </form>
         <div className="btn-group">
           {Object.keys(this.state.tagOptions).map((key, idx) => {
             if (this.state.tagOptions[key]) {
