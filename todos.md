@@ -43,8 +43,9 @@ Allow user to do two step process to create an account. First, create a name, em
 
 Then, add a photo, tags, and bio.
 
--- Photo needs to be able to upload something for them (auto saves or updates)
+<!-- -- Photo needs to be able to upload something for them (auto saves or updates) -->
+-- Add a a submit button that sends all the updated info to Firebase but not the image it's already done.
 -- tags needs to be added, and then you hit save
--- Bio... 1 line 
+-- Bio... 1 line
 
 

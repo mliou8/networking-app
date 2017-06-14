@@ -28,13 +28,19 @@ class Complete extends React.Component {
       isUploading: false,
       progress: 0,
       avatarURL: blank,
-      profileComplete: false
+      profileComplete: false,
+      bio: ''
     }
       
     this.addTags = this.addTags.bind(this)
     this.removeTags = this.removeTags.bind(this)
+    this.handleBioChange = this.handleBioChange.bind(this)
   }
   
+  handleBioChange(event) {
+   this.setState({bio: event.target.value});
+ }
+
   handleUploadStart = () => this.setState({isUploading: true, progress: 0});
   
   handleProgress = (progress) => this.setState({progress});
@@ -63,6 +69,10 @@ class Complete extends React.Component {
     tagOptions[tag] = true
     selectedTags[tag] = false
     this.setState({tagOptions: tagOptions, selectedTags: selectedTags})
+  }
+  
+  handleSubmit(data) {
+    this.props.actions.updateUser(data);
   }
   
   render() {
@@ -106,7 +116,6 @@ class Complete extends React.Component {
           }
         </div>
         <div>Placeholder</div>
-        
         {Object.keys(this.state.selectedTags).map((key, idx) => {
           if (this.state.selectedTags[key]) {
             return (
@@ -117,7 +126,8 @@ class Complete extends React.Component {
           }
         })
         }
-        <input value={selectedTags}></input>
+        <input type="text" value={this.state.bio} onChange={this.handleBioChange} />
+        <div><button onClick={this.handleSubmit({tags: this.state.selectedTags, bio: this.state.bio })} className="btn btn-primary">Finish Profile</button></div>
       </div>
     );
   }

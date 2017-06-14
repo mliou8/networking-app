@@ -123,6 +123,26 @@ export function updatePair(currentUser, otherUser, action) {
   }
 }
 
+//This updates the current user with the object/keys and overrides whats already there.
+export function updateUser(data) {
+  return function (dispatch) {
+    const userUid = Firebase.auth().currentUser.uid
+    let updates = {};
+    Object.keys(data).forEach((key) => {
+      updates[`/users/${userUid}/${key}`] = data[key]
+    })
+    Firebase.database().ref().update(updates)
+  }
+}
+
+function createUser(userId, name, email) {
+  Firebase.database().ref('users/' + userId).set({
+    displayName: name,
+    email: email,
+    usersPaired: [userId],
+  });
+}
+
 //Check for Match on both sides
 function checkMatch(userOne, userTwo) {
   let updates = {};
