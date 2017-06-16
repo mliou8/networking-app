@@ -41,11 +41,13 @@ If User is already defined, then need to be able to
 
 Allow user to do two step process to create an account. First, create a name, email, and password. 
 
-Then, add a photo, tags, and bio.
+Then, add a photo, tags, and bio. (If they leave, then force them back to this page as long as they didn't finish.)
 
 <!-- -- Photo needs to be able to upload something for them (auto saves or updates) -->
--- Add a a submit button that sends all the updated info to Firebase but not the image it's already done.
--- tags needs to be added, and then you hit save
+<!-- -- Add a a submit button that sends all the updated info to Firebase but not the image it's already done. -->
+<!-- -- tags needs to be added, and then you hit save -->
 -- Bio... 1 line
+-- After profile completion is filled out and saved profile, redirect to match page. 
+
 
 

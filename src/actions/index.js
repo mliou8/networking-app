@@ -124,7 +124,7 @@ export function updatePair(currentUser, otherUser, action) {
 }
 
 //This updates the current user with the object/keys and overrides whats already there.
-export function updateUser(data) {
+export function completeUser(data) {
   return function (dispatch) {
     const userUid = Firebase.auth().currentUser.uid
     let updates = {};
@@ -132,6 +132,9 @@ export function updateUser(data) {
       updates[`/users/${userUid}/${key}`] = data[key]
     })
     Firebase.database().ref().update(updates)
+    .then(response => {
+      browserHistory.push('/matchpage');
+    })
   }
 }
 

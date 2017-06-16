@@ -72,8 +72,9 @@ class Complete extends React.Component {
   }
   
   handleSubmit(data) {
-    this.props.actions.updateUser(data);
+    this.props.actions.completeUser(data);
   }
+  
   
   render() {
     let selectedTags = [];
@@ -127,7 +128,7 @@ class Complete extends React.Component {
         })
         }
         <input type="text" value={this.state.bio} onChange={this.handleBioChange} />
-        <div><button onClick={this.handleSubmit({tags: this.state.selectedTags, bio: this.state.bio })} className="btn btn-primary">Finish Profile</button></div>
+        <div><button onClick={() => {this.handleSubmit({tags: this.state.selectedTags, bio: this.state.bio}) }} className="btn btn-primary">Finish Profile</button></div>
       </div>
     );
   }
