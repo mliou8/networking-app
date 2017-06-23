@@ -27,9 +27,6 @@ class Header extends React.Component {
         </li>,
         <li className="nav-item" key={2}>
           <Link className="nav-link" to="/signup">Sign Up</Link>
-        </li>,
-        <li className="nav-item" key={3}>
-          <Link className="nav-link" to="/profile-complete">Complete Profile</Link>
         </li>
       ]
     }

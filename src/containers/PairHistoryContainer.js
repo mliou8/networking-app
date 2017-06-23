@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Complete from '../components/Complete'
+import MatchedPairs from '../components/MatchPage'
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 
@@ -7,7 +7,8 @@ import * as Actions from '../actions';
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
-    userInfo: state.user.userData
+    userInfo: state.user.userData,
+    matchInfo: state.user.matchArr || ''
   };
 }
 
@@ -20,4 +21,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Complete);
+)(MatchedPairs);
