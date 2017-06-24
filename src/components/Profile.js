@@ -76,7 +76,7 @@ class Profile extends React.Component {
   
   
   render() {
-    const {displayName, email, imageUrl, bio, tags} = this.props.userInfo.data
+    const {displayName = '', email = '', imageUrl = '', bio = '', tags = ''} = this.props.userInfo.data
     return (
       <div>
         <form>
@@ -109,7 +109,17 @@ class Profile extends React.Component {
             }
           })
          }
-         <button type="button" onClick={() => {this.props.actions.updateUser({tags: this.state.selectedTags, bio: this.state.bio, imageUrl: this.state.avatarURL})}}>Save Changes</button>
+         <button type="button" 
+           onClick={() => {
+             this.props.actions.updateUser(
+               {
+                tags: this.state.selectedTags, 
+                bio: this.state.bio, 
+                imageUrl: this.state.avatarURL
+                })
+              }
+             }
+           >Save Changes</button>
        </form>
       </div>
     </div>

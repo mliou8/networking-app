@@ -46,25 +46,23 @@ If User is already defined, then need to be able to
 <!--
 Then, add a photo, tags, and bio. (If they leave, then force them back to this page as long as they didn't finish.) -->
 
-
-Then, add a photo, tags, and bio. (If they leave, then force them back to this page as long as they didn't finish.)
-=======
-Then, add a photo, tags, and bio. (If they leave, then force them back to this page as long as they didn't finish.) -->
->>>>>>> Stashed changes
-
 <!-- -- Photo needs to be able to upload something for them (auto saves or updates) -->
 <!-- -- Add a a submit button that sends all the updated info to Firebase but not the image it's already done. -->
 <!-- -- tags needs to be added, and then you hit save -->
 
 <!-- -- Bio... 1 line -->
 <!-- -- After profile completion is filled out and saved profile, redirect to match page.  -->
---- Add a field for linkedin profile (Must be public url)
+<!-- --- Add a field for linkedin profile (Must be public url) -->
+
 -- Display that... with the linkedin integration icon.
 
 -- MATCH Page/ Here is where you view the people that you've matched with.
 -- Note: I tracked down the thought about the Yes or NO. I was influenced by Tinder and dating apps.
+-- I got here because I didnt want to make someone have to write messages back and forth.
  Realistically I didn't need to ask you at all if you wanted to be matched, I did that work for you upfront.
- Remove the yes/no functionality and the update logic.
+ 
+ 
+-- Remove the yes/no functionality and the update logic.
 -- Bio... 1 line
 -- After profile completion is filled out and saved profile, redirect to match page. 
 

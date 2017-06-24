@@ -1,22 +1,13 @@
 import { browserHistory } from 'react-router';
 import Firebase from 'firebase';
-// import {firebaseKey} from '../env_variables/api-keys.js'
+import {firebaseKey} from '../env_variables/api-keys.js'
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const AUTH_USER = 'AUTH_USER';
 export const FETCH_USER_DATA = 'FETCH_USER_DATA';
 export const FETCH_MATCH_DATA = 'FETCH_MATCH_DATA';
 
-// const config = firebaseKey;
-
-const config = {
-   apiKey: "AIzaSyBfuM-di6L6OcbXDWuZIqvn_iMyy-dU5cs",
-   authDomain: "networking-app-7b6b0.firebaseapp.com",
-   databaseURL: "https://networking-app-7b6b0.firebaseio.com",
-   projectId: "networking-app-7b6b0",
-   storageBucket: "networking-app-7b6b0.appspot.com",
-   messagingSenderId: "543111276100"
- };
+const config = firebaseKey;
 
 Firebase.initializeApp(config);
 

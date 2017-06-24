@@ -7,10 +7,11 @@ import '../styles/App.css';
 
 class Home extends React.Component {
   render() {
-    
-    const userInfo = {
+    const userInfo = {}
+    userInfo.data = {
       displayName: 'Michael Liou', 
       photoUrl: '',
+      linkedinUrl: 'www.linkedin.com/in/michaelcliou',
       bio: 'Hi! I made this tool so you could connect w/ the people you were supposed to meet.'
     }
     
