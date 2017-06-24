@@ -12,9 +12,9 @@ Connect their linkedin profiles. Make sure to pass in a reference that they were
 
 Different "pages"
 
-0 Landing Page: See the profile of Michael the hardcoded user.
-  Either Click Routes you to Signup Page
-  either through Linkedin Or Custom
+0 Landing Page: See the profile of Michael the hardcoded user. 
+  Either Click Routes you to Signup Page.
+  An invite Link?? (TODO)
 1 Signup Page (Auth with Linkedin), fill in tags data regardless.
 1 a) Signup Part 2. Tiered Signup
 2 your match page / no matches today / you matched
@@ -40,14 +40,22 @@ If User is already defined, then need to be able to
 (such as required data) -->
 
 <!-- //Allow user to log back in using linkedin. -->
+<!-- Allow user to do two step process to create an account. First, create a name, email, and password. 
 
 <!-- Allow user to do two step process to create an account. First, create a name, email, and password.  -->
 <!--
 Then, add a photo, tags, and bio. (If they leave, then force them back to this page as long as they didn't finish.) -->
 
+
+Then, add a photo, tags, and bio. (If they leave, then force them back to this page as long as they didn't finish.)
+=======
+Then, add a photo, tags, and bio. (If they leave, then force them back to this page as long as they didn't finish.) -->
+>>>>>>> Stashed changes
+
 <!-- -- Photo needs to be able to upload something for them (auto saves or updates) -->
 <!-- -- Add a a submit button that sends all the updated info to Firebase but not the image it's already done. -->
 <!-- -- tags needs to be added, and then you hit save -->
+
 <!-- -- Bio... 1 line -->
 <!-- -- After profile completion is filled out and saved profile, redirect to match page.  -->
 --- Add a field for linkedin profile (Must be public url)
@@ -57,3 +65,13 @@ Then, add a photo, tags, and bio. (If they leave, then force them back to this p
 -- Note: I tracked down the thought about the Yes or NO. I was influenced by Tinder and dating apps.
  Realistically I didn't need to ask you at all if you wanted to be matched, I did that work for you upfront.
  Remove the yes/no functionality and the update logic.
+-- Bio... 1 line
+-- After profile completion is filled out and saved profile, redirect to match page. 
+
+<!-- -- Bio... 1 line -->
+<!-- -- After profile completion is filled out and saved profile, redirect to match page.  -->
+
+-- Add in functionality to change saved photo, or modify your profile info. 
+
+-- Tags should be capped at 3 max. Including the hardcoded one that you were added to. 
+

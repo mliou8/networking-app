@@ -142,7 +142,23 @@ export function completeUser(data) {
     })
     Firebase.database().ref().update(updates)
     .then(response => {
+      dispatch(fetchUserData());
       browserHistory.push('/matchpage');
+    })
+  }
+}
+
+//Same function as completeUser except without the reroute :-/
+export function updateUser(data) {
+  return function (dispatch) {
+    const userUid = Firebase.auth().currentUser.uid
+    let updates = {};
+    Object.keys(data).forEach((key) => {
+      updates[`/users/${userUid}/${key}`] = data[key]
+    })
+    Firebase.database().ref().update(updates)
+    .then(response => {
+      dispatch(fetchUserData());
     })
   }
 }
