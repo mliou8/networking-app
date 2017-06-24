@@ -6,12 +6,10 @@ class MatchPage extends React.Component {
     this.state = {
       submitVote: false
     }
-    this.updatePair = this.updatePair.bind(this)
   }
   
   componentWillMount() {
     if(this.props.userInfo) {
-      this.props.actions.fetchMatchData(this.props.userInfo)
     }
   }
   
@@ -36,13 +34,9 @@ class MatchPage extends React.Component {
       <h1> This is them innit </h1>
         <h3>Display Name: {matchData.displayName || 'N/A' } </h3>
         <h3>Email: {matchData.email || 'N/A' } </h3>
-        {!this.state.submitVote ? 
           <div>
-            <button onClick={() => this.updatePair(this.props.userInfo, this.props.matchInfo, 'yes')}>This is the yes.</button>
-            <button onClick={() => this.updatePair(this.props.userInfo, this.props.matchInfo, 'no')}>This is the no.</button>
+            <button onClick={() => this.props.actions.fetchMatchData(this.props.userInfo)}>Lets fetch the match</button>
           </div>
-          : <div>Thanks for letting us know! Check back in tomorrow</div>
-        } 
       </div>
     );
   }

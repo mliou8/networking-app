@@ -54,22 +54,28 @@ Then, add a photo, tags, and bio. (If they leave, then force them back to this p
 <!-- -- After profile completion is filled out and saved profile, redirect to match page.  -->
 <!-- --- Add a field for linkedin profile (Must be public url) -->
 
--- Display that... with the linkedin integration icon.
 
--- MATCH Page/ Here is where you view the people that you've matched with.
+<!-- -- MATCH Page/ Here is where you view the people that you've matched with.
 -- Note: I tracked down the thought about the Yes or NO. I was influenced by Tinder and dating apps.
 -- I got here because I didnt want to make someone have to write messages back and forth.
- Realistically I didn't need to ask you at all if you wanted to be matched, I did that work for you upfront.
+ Realistically I didn't need to ask you at all if you wanted to be matched, I did that work for you upfront. -->
  
- 
--- Remove the yes/no functionality and the update logic.
--- Bio... 1 line
--- After profile completion is filled out and saved profile, redirect to match page. 
-
 <!-- -- Bio... 1 line -->
 <!-- -- After profile completion is filled out and saved profile, redirect to match page.  -->
 
+-- Remove the yes/no functionality and the update logic.
+-- You can't run "the match function" every time
+-- Each "retrieved match" lasts for 3 days. 
+-- Need to write a firebase chron job for that.
+-- Low key I can also update this myself using a button in my UI under "admin" (lol)
+-- Each match updates both pairs so that they won't see each other again.... but what if you miss a match? I guess that's fine, that's part of the fun?
+-- Optional Feature: Each person that you end up choosing will give you some kind of bonus points.
+
+
 -- Add in functionality to change saved photo, or modify your profile info. 
+
+-- Display that... with the linkedin integration icon.
+
 
 -- Tags should be capped at 3 max. Including the hardcoded one that you were added to. 
 
